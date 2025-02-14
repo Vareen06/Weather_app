@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Weather Forecast</h2>
+  <input type="text" [(ngModel)]="location" placeholder="Enter location" />
+  <div>
+    <button (click)="getWeather()">Get Weather</button>
+    <button (click)="getWeatherfor5days()">Get Weather for 5 Days</button>
+  </div>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <div *ngIf="forecastData" class="weather">
+    <h3 *ngIf="!today">Weather for {{ location }} for next 5 days</h3>
+    <h3 *ngIf="today">Weather for {{ location }}</h3>
+    <div *ngFor="let day of forecastData">
+      <h4>{{ day.date }}</h4>
+      <p>🌡️ Temp: {{ day.day.avgtemp_c }}°C</p>
+      <p>🌤️ Condition: {{ day.day.condition.text }}</p>
+      <img [src]="day.day.condition.icon" alt="Weather Icon" />
+    </div>
+  </div>
+</div>
